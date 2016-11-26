@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - arthuriu@localhost" uuid="b0a808ef-b5d6-4e21-abc9-39137d7d708d">
-    <database-info product="MySQL" version="5.6.25" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+  <data-source name="MySQL - arthurius@www.local.dev" uuid="b0a808ef-b5d6-4e21-abc9-39137d7d708d">
+    <database-info product="MySQL" version="5.7.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
-    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <schema name="" catalog="arthuriu"/>
-    <table name="product" schema="" catalog="arthuriu" type="TABLE">
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="arthurius"/>
+    <table name="product" schema="" catalog="arthurius" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ref" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="type" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="marque" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="description" sqlType="VARCHAR" precision="700" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="1800" scale="0" nullable="true" jdbcType="12"/>
       <column name="picture" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="manche" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="acier" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="size" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
-      <column name="promo" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="promo" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <column name="price" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
       <column name="piece" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="name" unique="false" columns="name"/>
     </table>
-    <table name="product_save" schema="" catalog="arthuriu" type="TABLE">
+    <table name="product_save" schema="" catalog="arthurius" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ref" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="type" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
@@ -50,7 +50,7 @@
       <index name="size" unique="false" columns="size"/>
       <index name="type" unique="false" columns="type"/>
     </table>
-    <table name="section" schema="" catalog="arthuriu" type="TABLE">
+    <table name="section" schema="" catalog="arthurius" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
