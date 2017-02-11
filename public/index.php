@@ -24,7 +24,9 @@ require __DIR__ . '/../src/dependencies.php';
 require __DIR__ . '/../src/middleware.php';
 
 // Register routes
-require __DIR__ . '/../src/routes.php';
+require __DIR__ . '/../src/routes/product.route.php';
+require __DIR__ . '/../src/routes/category.route.php';
+require __DIR__ . '/../src/routes/paypal.route.php';
 
 // Run app
 $app->run();

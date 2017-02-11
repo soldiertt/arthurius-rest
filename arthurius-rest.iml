@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/container-interop/container-interop" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/curl/curl" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
@@ -49,6 +50,7 @@
           <root url="file://$MODULE_DIR$/vendor/psr/http-message" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/environment" />
           <root url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+          <root url="file://$MODULE_DIR$/vendor/curl/curl" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
@@ -87,6 +89,7 @@
           <root url="file://$MODULE_DIR$/vendor/psr/http-message" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/environment" />
           <root url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+          <root url="file://$MODULE_DIR$/vendor/curl/curl" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
@@ -122,11 +125,22 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/composer.phar/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/composer.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP Runtime" type="php">
+        <CLASSES>
+          <root url="jar://$APPLICATION_PLUGINS_DIR$/php/lib/php.jar!/stubs/standard" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$APPLICATION_PLUGINS_DIR$/php/lib/php.jar!/stubs/standard" />
         </SOURCES>
       </library>
     </orderEntry>

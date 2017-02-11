@@ -20,6 +20,12 @@ class Product extends Entity
         ORDER BY name desc
 EOD;
 
+    public static $SQL_FIND_BY_BRAND = <<<'EOD'
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
+        FROM product WHERE marque=?
+        ORDER BY name desc
+EOD;
+
     public static $SQL_SEARCH = <<<'EOD'
         SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
         FROM product
@@ -32,8 +38,17 @@ EOD;
         WHERE promo = 'promo'
 EOD;
 
+    public static $SQL_ALL_BRANDS = <<<'EOD'
+        SELECT distinct (marque)
+        FROM product
+EOD;
+
     public static function findByCategory($category) {
         return self::queryList(self::$SQL_FIND_BY_CATEGORY, [$category]);
+    }
+
+    public static function findByBrand($brandName) {
+        return self::queryList(self::$SQL_FIND_BY_BRAND, [$brandName]);
     }
 
     public static function search($term) {
@@ -43,6 +58,10 @@ EOD;
 
     public static function findPromo() {
         return self::queryList(self::$SQL_PROMO);
+    }
+
+    public static function findAllBrands() {
+        return self::queryList(self::$SQL_ALL_BRANDS);
     }
 
     public static function debug_to_console($data) {
