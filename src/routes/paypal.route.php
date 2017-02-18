@@ -4,6 +4,11 @@
 $app->post('/checkout', function ($request, $response, $args) {
     $parsedCart = $request->getParsedBody();
 
+    $this->logger->info("/checkout /".json_encode($parsedCart));
+
+    $totalAmount = strval($parsedCart['totalAmount']);
+    $this->logger->info("total amount ".$totalAmount);
+
     $token = getPaypalAccessToken();
     if (!$token) {
         return $response->withStatus(500)
@@ -23,28 +28,27 @@ $app->post('/checkout', function ($request, $response, $args) {
         'transactions' => array(
             0 => array(
                 'amount' => array(
-                    'total' => '10',
+                    'total' => $totalAmount,
                     'currency' => 'EUR'
                 ),
                 'item_list' => array (
-                    'items' => array(
-                        0 => array(
-                            'quantity' => '1',
-                            'name' => 'mon produit 1',
-                            'price' => '5',
-                            'currency' => 'EUR'
-                        ),
-                        1 => array(
-                            'quantity' => '1',
-                            'name' => 'mon produit 2',
-                            'price' => '5',
-                            'currency' => 'EUR'
-                        )
-                    )
+                    'items' => array()
                 )
             )
         )
     );
+
+    foreach($parsedCart['orders'] as $order) {
+        $quantity = $order['count'];
+        $name = $order['article']['name'];
+        $price = $order['article']['price'];
+        array_push($body['transactions'][0]['item_list']['items'], array(
+            'quantity' => strval($quantity),
+            'name' => $name,
+            'price' => strval($price),
+            'currency' => 'EUR'
+        ));
+    }
 
     $curl = new Curl\Curl();
     $curl->setHeader('Content-Type', 'application/json');
@@ -74,7 +78,7 @@ $app->post('/execute-payment', function ($request, $response, $args) {
     $paymentID = $data['paymentID'];
     $payerID = $data['payerID'];
 
-    $this->logger->info("/execute-payment /".json_encode($data).'/'.$paymentID.'/'.$payerID);
+    $this->logger->info("/execute-payment /".$paymentID.'/'.$payerID);
 
     $token = getPaypalAccessToken();
     if (!$token) {
@@ -91,7 +95,9 @@ $app->post('/execute-payment', function ($request, $response, $args) {
 
     $postUrl = 'https://api.sandbox.paypal.com/v1/payments/payment/'.$paymentID.'/execute/';
 
-    $curl->post($postUrl, json_encode($body) );
+    $this->logger->info("POST URL ".$postUrl);
+
+    $curl->post($postUrl, json_encode($body));
 
     if ($curl->error) {
         return $response->withStatus(500)

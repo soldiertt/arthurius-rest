@@ -29,4 +29,8 @@ class Entity
     public static function queryList($statement, $attributes = null) {
         return App::getDb()->queryList($statement, get_called_class(), $attributes);
     }
+
+    public static function insert($statement, $attributes) {
+        return App::getDb()->insert($statement, get_called_class(), $attributes);
+    }
 }

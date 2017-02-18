@@ -3,7 +3,8 @@
 
 // e.g: $app->add(new \Slim\Csrf\Guard);
 $corsOptions = array(
-    "origin" => "www.local.dev:3000"
+    "origin" => "http://www.local.dev:3000",
+    "allowMethods" => array("GET,POST,PUT,DELETE,PATCH")
 );
 $cors = new \CorsSlim\CorsSlim($corsOptions);
-$app->add(new \CorsSlim\CorsSlim());
+$app->add($cors);

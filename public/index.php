@@ -27,6 +27,9 @@ require __DIR__ . '/../src/middleware.php';
 require __DIR__ . '/../src/routes/product.route.php';
 require __DIR__ . '/../src/routes/category.route.php';
 require __DIR__ . '/../src/routes/paypal.route.php';
+require __DIR__ . '/../src/routes/order.route.php';
+require __DIR__ . '/../src/routes/user.route.php';
+require __DIR__ . '/../src/routes/country.route.php';
 
 // Run app
 $app->run();

@@ -35,16 +35,20 @@ class Database
     }
 
     public function queryOne($sql, $className, $attributes = null) {
-        $stmt = $this->getStatement($sql, $className, $attributes);
+        $stmt = $this->getReadStatement($sql, $className, $attributes);
         return $stmt->fetch();
     }
 
     public function queryList($sql, $className, $attributes = null) {
-        $stmt = $this->getStatement($sql, $className, $attributes);
+        $stmt = $this->getReadStatement($sql, $className, $attributes);
         return $stmt->fetchAll();
     }
 
-    private function getStatement($sql, $className, $attributes) {
+    public function insert($sql, $className, $attributes) {
+        return $this->getExecStatement($sql, $className, $attributes);
+    }
+
+    private function getReadStatement($sql, $className, $attributes) {
         $stmt = $this->getPDO()->prepare($sql);
         if ($attributes != null) {
             $stmt->execute($attributes);
@@ -53,5 +57,14 @@ class Database
         }
         $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
         return $stmt;
+    }
+
+    private function getExecStatement($sql, $className, $attributes) {
+        $stmt = $this->getPDO()->prepare($sql);
+        if ($attributes != null) {
+            return $stmt->execute($attributes);
+        } else {
+            return $stmt->execute();
+        }
     }
 }
