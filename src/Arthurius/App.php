@@ -23,6 +23,7 @@ class App
     public static function getDb() {
         self::$env = getenv('ENV')?:'development';
         var_dump(self::$env);
+        die();
         if (self::$env === 'test') {
             self::$DB_HOST = 'vps313396.ovh.net';
             self::$DB_USER = 'arthurius';
