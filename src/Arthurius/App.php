@@ -12,16 +12,22 @@ namespace Arthurius;
 class App
 {
 
-    const DB_HOST = 'mysql';
-    const DB_NAME = 'arthurius';
-    const DB_USER = 'root';
-    const DB_PASS = 'fizzye';
+    private static $DB_HOST = 'mysql';
+    private static $DB_NAME = 'arthurius';
+    private static $DB_USER = 'root';
+    private static $DB_PASS = 'fizzye';
 
     private static $database;
 
     public static function getDb() {
+        $env = getenv('ENV')?:'development';
+        if ($env == 'test') {
+            self::$DB_HOST = 'vps313396.ovh.net';
+            self::$DB_USER = 'arthurius';
+            self::$DB_PASS = 'arthurius';
+        }
         if (self::$database === null) {
-            self::$database = new Database(self::DB_HOST, self::DB_NAME, self::DB_USER, self::DB_PASS);
+            self::$database = new Database(self::$DB_HOST, self::$DB_NAME, self::$DB_USER, self::$DB_PASS);
         }
         return self::$database;
     }
