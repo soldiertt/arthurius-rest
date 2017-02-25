@@ -18,10 +18,12 @@ class App
     private static $DB_PASS = 'fizzye';
 
     private static $database;
+    private static $env;
 
     public static function getDb() {
-        $env = getenv('ENV')?:'development';
-        if ($env == 'test') {
+        self::$env = getenv('ENV')?:'development';
+        var_dump(self::$env);
+        if (self::$env === 'test') {
             self::$DB_HOST = 'vps313396.ovh.net';
             self::$DB_USER = 'arthurius';
             self::$DB_PASS = 'arthurius';
