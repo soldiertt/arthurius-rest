@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a1ad7eb-13df-4e1d-9ed3-1d1486b804d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/db_refactoring.sql" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Arthurius/model/Product.php" afterPath="$PROJECT_DIR$/src/Arthurius/model/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/middleware.php" afterPath="$PROJECT_DIR$/src/middleware.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes/user.route.php" afterPath="$PROJECT_DIR$/src/routes/user.route.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="arthurius-rest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,41 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Product.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Arthurius/model/Product.php">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="product.route.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routes/product.route.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.route.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routes/user.route.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_refactoring.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/db_refactoring.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
+            <state relative-caret-position="51">
+              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -140,6 +114,7 @@
         <option value="$PROJECT_DIR$/src/routes/user.route.php" />
         <option value="$PROJECT_DIR$/scripts/db_refactoring.sql" />
         <option value="$PROJECT_DIR$/src/Arthurius/model/Product.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -240,7 +215,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches">
         <subPane>
           <PATH>
@@ -259,6 +233,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -271,9 +246,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arthurius-rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arthurius-rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -636,7 +625,9 @@
       <workItem from="1488401086997" duration="18000" />
       <workItem from="1488642536194" duration="823000" />
       <workItem from="1489073251019" duration="1957000" />
-      <workItem from="1489262580249" duration="412000" />
+      <workItem from="1489262580249" duration="441000" />
+      <workItem from="1489265133982" duration="405000" />
+      <workItem from="1489265555109" duration="303000" />
     </task>
     <task id="LOCAL-00001" summary="add search method">
       <created>1475952396034</created>
@@ -708,11 +699,18 @@
       <option name="project" value="LOCAL" />
       <updated>1488052813035</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update datasource">
+      <created>1489263009999</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1489263009999</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111756000" />
+    <option name="totallyTimeSpent" value="112493000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -735,20 +733,20 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5042644" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34025374" sideWeight="0.49573562" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34025374" sideWeight="0.49573562" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18181819" sideWeight="0.49573562" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50865054" sideWeight="0.49573562" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23410758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24022005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24938875" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -762,6 +760,24 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -779,7 +795,8 @@
     <MESSAGE value="paypal integration" />
     <MESSAGE value="auth0 profile integration +orders + countries" />
     <MESSAGE value="update for test env" />
-    <option name="LAST_COMMIT_MESSAGE" value="update for test env" />
+    <MESSAGE value="update datasource" />
+    <option name="LAST_COMMIT_MESSAGE" value="update datasource" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -873,13 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1160,18 +1170,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/db_refactoring.sql">
+    <entry file="file://$PROJECT_DIR$/src/Arthurius/model/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
+        <state relative-caret-position="544">
+          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Arthurius/model/Product.php">
+    <entry file="file://$PROJECT_DIR$/scripts/db_refactoring.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+        <state relative-caret-position="0">
+          <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
           <folding />
         </state>
       </provider>
