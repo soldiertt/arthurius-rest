@@ -15,27 +15,27 @@ class Product extends Entity
     public static $table = "product";
 
     public static $SQL_FIND_BY_CATEGORY = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
         FROM product WHERE type=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_FIND_BY_BRAND = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
         FROM product WHERE marque=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_SEARCH = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
         FROM product
         WHERE marque like ? OR name like ? OR description like ? or manche like ?
 EOD;
 
     public static $SQL_PROMO = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, promo, price, piece
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
         FROM product
-        WHERE promo = 'promo'
+        WHERE promo = true
 EOD;
 
     public static $SQL_ALL_BRANDS = <<<'EOD'

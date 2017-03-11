@@ -63,12 +63,11 @@ $app->patch('/user/{userId}', function ($request, $response, $args) {
             ->write(json_encode(array('code' => $curl->error_code, 'message' => $curl->response)));
     } else {
 
+        $this->logger->info("response : " . $curl->response);
+
         return $response->withStatus(200)
             ->withHeader('Content-Type', 'application/json')
-            ->write(json_encode(array(
-                    'message' => 'success'
-                ))
-            );
+            ->write($curl->response);
     }
 });
 
