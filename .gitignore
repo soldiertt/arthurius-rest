@@ -2,4 +2,4 @@
 /logs/*
 !/logs/README.md
 /.idea
-src/Arthurius/secrets/Secrets.php
+/src/Arthurius/secrets/Secrets.php
