@@ -8,30 +8,58 @@
 
 namespace Arthurius;
 
+use Arthurius\secrets\Secrets;
 
 class App
 {
-
-    private static $DB_HOST = 'mysql';
-    private static $DB_NAME = 'arthurius';
-    private static $DB_USER = 'root';
-    private static $DB_PASS = 'fizzye';
+    private static $DB_LOCAL_HOST;
+    private static $DB_LOCAL_NAME;
+    private static $DB_LOCAL_USER;
+    private static $DB_LOCAL_PASS;
+    private static $DB_TEST_HOST;
+    private static $DB_TEST_NAME;
+    private static $DB_TEST_USER;
+    private static $DB_TEST_PASS;
+    private static $DB_HOST;
+    private static $DB_NAME;
+    private static $DB_USER;
+    private static $DB_PASS;
 
     private static $database;
     private static $env;
 
-    public static function getDb() {
-        self::$env = getenv('ENV')?:'development';
+    static function init() {
+        self::$DB_LOCAL_HOST = 'mysql';
+        self::$DB_LOCAL_NAME = 'arthurius';
+        self::$DB_LOCAL_USER = Secrets::$LOCAL_DB_USER;
+        self::$DB_LOCAL_PASS = Secrets::$LOCAL_DB_PASS;
+        self::$DB_TEST_HOST = 'vps313396.ovh.net';
+        self::$DB_TEST_NAME = 'arthurius';
+        self::$DB_TEST_USER = Secrets::$TEST_DB_USER;
+        self::$DB_TEST_PASS = Secrets::$TEST_DB_PASS;
+    }
 
-        if (self::$env === 'test') {
-            self::$DB_HOST = 'vps313396.ovh.net';
-            self::$DB_USER = 'arthurius';
-            self::$DB_PASS = 'arthurius';
-        }
+    public static function getDb() {
         if (self::$database === null) {
+
+            self::$env = getenv('ENV')?:'development';
+
+            if (self::$env === 'test') {
+                self::$DB_HOST = self::$DB_TEST_HOST;
+                self::$DB_NAME = self::$DB_TEST_NAME;
+                self::$DB_USER = self::$DB_TEST_USER;
+                self::$DB_PASS = self::$DB_TEST_PASS;
+            } else {
+                self::$DB_HOST = self::$DB_LOCAL_HOST;
+                self::$DB_NAME = self::$DB_LOCAL_NAME;
+                self::$DB_USER = self::$DB_LOCAL_USER;
+                self::$DB_PASS = self::$DB_LOCAL_PASS;
+            }
+
             self::$database = new Database(self::$DB_HOST, self::$DB_NAME, self::$DB_USER, self::$DB_PASS);
         }
         return self::$database;
     }
 
 }
+App::init();

@@ -30,6 +30,7 @@ require __DIR__ . '/../../src/routes/paypal.route.php';
 require __DIR__ . '/../../src/routes/order.route.php';
 require __DIR__ . '/../../src/routes/user.route.php';
 require __DIR__ . '/../../src/routes/country.route.php';
+require __DIR__ . '/../../src/routes/phpmailer.route.php';
 
 // Run app
 $app->run();
