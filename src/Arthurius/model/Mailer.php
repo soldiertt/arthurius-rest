@@ -39,6 +39,7 @@ class Mailer {
         //$this->mailer->AltBody = 'This is a plain-text message body';
         //Attach an image file
         //$this->mailer->addAttachment('images/phpmailer_mini.png');
+        $this->mailer->CharSet = 'UTF-8';
     }
 
      public static function sendMail($mail) {
@@ -66,6 +67,11 @@ class Mailer {
                 $body = str_replace('%userEmail%', $mail['parameters']['userEmail'], $body);
                 $body = str_replace('%userId%', $mail['parameters']['userId'], $body);
                  break;
+             case "ACCOUNT_DELETION_CANCEL":
+                 $body = file_get_contents(__DIR__ . '/../mailtemplates/account_deletion_request_cancelled.html');
+                 $body = str_replace('%userEmail%', $mail['parameters']['userEmail'], $body);
+                 $body = str_replace('%userId%', $mail['parameters']['userId'], $body);
+                 break;
          }
          return $body;
      }
@@ -75,6 +81,9 @@ class Mailer {
         switch ($mail['template']) {
             case "ACCOUNT_DELETION":
                 $subject = "[Arthurius] Demande de suppression de compte";
+                break;
+            case "ACCOUNT_DELETION_CANCEL":
+                $subject = "[Arthurius] Demande de suppression de compte annulée";
                 break;
         }
         return $subject;
