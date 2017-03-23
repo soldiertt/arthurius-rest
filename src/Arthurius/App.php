@@ -10,8 +10,7 @@ namespace Arthurius;
 
 use Arthurius\secrets\Secrets;
 
-class App
-{
+class App {
     private static $DB_LOCAL_HOST;
     private static $DB_LOCAL_NAME;
     private static $DB_LOCAL_USER;

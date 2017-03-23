@@ -31,6 +31,6 @@ class Entity
     }
 
     public static function insert($statement, $attributes) {
-        return App::getDb()->insert($statement, get_called_class(), $attributes);
+        return App::getDb()->insert($statement, $attributes);
     }
 }

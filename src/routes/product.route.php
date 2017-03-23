@@ -52,6 +52,21 @@ $app->get('/product/brands', function ($request, $response, $args) {
 
 });
 
+$app->get('/product/top', function ($request, $response, $args) {
+    $leafCategory = $request->getQueryParam("leafCategory");
+    $rootCategory = $request->getQueryParam("rootCategory");
+    $this->logger->info("Slim-Skeleton '/product/top'");
+    $products = [];
+    if ($leafCategory) {
+        $products = Product::findTopSalesByLeafCategory($leafCategory);
+    } else if ($rootCategory) {
+        $products = Product::findTopSalesByRootCategory($rootCategory);
+    }
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($products));
+});
+
 $app->get('/product/{id}', function ($request, $response, $args) {
     $id = $request->getAttribute('id');
     $this->logger->info("Slim-Skeleton '/product/".$id);

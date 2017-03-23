@@ -43,7 +43,7 @@ class Mailer {
     }
 
      public static function sendMail($mail) {
-         $instance = new Self($mail);
+         $instance = new self($mail);
          return $instance->send();
      }
 

@@ -43,6 +43,22 @@ EOD;
         FROM product
 EOD;
 
+    public static $SQL_TOP_SALES_LEAF_CATEGORY = <<<'EOD'
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
+        FROM product
+        JOIN top_sales ON product.id = top_sales.product_id
+        WHERE type=?
+        ORDER BY top_sales.sales DESC
+EOD;
+
+    public static $SQL_TOP_SALES_ROOT_CATEGORY = <<<'EOD'
+        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, comment
+        FROM product
+        JOIN top_sales ON product.id = top_sales.product_id
+        WHERE type IN (SELECT type FROM section WHERE parent=?)
+        ORDER BY top_sales.sales DESC
+EOD;
+
     public static function findByCategory($category) {
         return self::queryList(self::$SQL_FIND_BY_CATEGORY, [$category]);
     }
@@ -62,6 +78,14 @@ EOD;
 
     public static function findAllBrands() {
         return self::queryList(self::$SQL_ALL_BRANDS);
+    }
+
+    public static function findTopSalesByLeafCategory($category) {
+        return self::queryList(self::$SQL_TOP_SALES_LEAF_CATEGORY, [$category]);
+    }
+
+    public static function findTopSalesByRootCategory($category) {
+        return self::queryList(self::$SQL_TOP_SALES_ROOT_CATEGORY, [$category]);
     }
 
     public static function debug_to_console($data) {

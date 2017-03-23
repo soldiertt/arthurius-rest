@@ -31,6 +31,7 @@ require __DIR__ . '/../../src/routes/order.route.php';
 require __DIR__ . '/../../src/routes/user.route.php';
 require __DIR__ . '/../../src/routes/country.route.php';
 require __DIR__ . '/../../src/routes/phpmailer.route.php';
+require __DIR__ . '/../../src/routes/slider.route.php';
 
 // Run app
 $app->run();

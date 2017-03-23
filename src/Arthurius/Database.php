@@ -27,7 +27,7 @@ class Database
 
     public function getPDO() {
         if ($this->pdo === null) {
-            $pdo = new PDO("mysql:host=" . $this->dbhost . ";dbname=" . $this->dbname . ";charset=utf8", $this->dbuser, $this->dbpass);//"UeyK7b45"
+            $pdo = new PDO("mysql:host=$this->dbhost;dbname=$this->dbname;charset=utf8", $this->dbuser, $this->dbpass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }
@@ -44,8 +44,8 @@ class Database
         return $stmt->fetchAll();
     }
 
-    public function insert($sql, $className, $attributes) {
-        return $this->getExecStatement($sql, $className, $attributes);
+    public function insert($sql, $attributes) {
+        return $this->getExecStatement($sql, $attributes);
     }
 
     private function getReadStatement($sql, $className, $attributes) {
@@ -59,7 +59,7 @@ class Database
         return $stmt;
     }
 
-    private function getExecStatement($sql, $className, $attributes) {
+    private function getExecStatement($sql, $attributes) {
         $stmt = $this->getPDO()->prepare($sql);
         if ($attributes != null) {
             return $stmt->execute($attributes);
