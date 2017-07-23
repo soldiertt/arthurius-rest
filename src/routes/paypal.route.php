@@ -7,6 +7,7 @@ $app->post('/checkout', function ($request, $response, $args) {
     $this->logger->info("/checkout /".json_encode($parsedCart));
 
     $totalAmount = strval($parsedCart['totalAmount']);
+    $shipping = strval($parsedCart['shipping']);
     $this->logger->info("total amount ".$totalAmount);
 
     $token = getPaypalAccessToken();
@@ -49,6 +50,13 @@ $app->post('/checkout', function ($request, $response, $args) {
             'currency' => 'EUR'
         ));
     }
+
+    array_push($body['transactions'][0]['item_list']['items'], array(
+        'quantity' => strval(1),
+        'name' => 'Shipping',
+        'price' => strval($shipping),
+        'currency' => 'EUR'
+    ));
 
     $curl = new Curl\Curl();
     $curl->setHeader('Content-Type', 'application/json');

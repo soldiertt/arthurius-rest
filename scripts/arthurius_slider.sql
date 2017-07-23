@@ -1,0 +1,3 @@
+INSERT INTO arthurius.slider (image, title1, title2, description, link) VALUES ('slider1.jpg', 'SALE', 'Titre 2 du slider numéro 1', 'Petite description de l''offre pour le slider numéro 1.', 'detail/635');
+INSERT INTO arthurius.slider (image, title1, title2, description, link) VALUES ('slider2.jpg', 'COUCOU !!', 'Titre 2 du slider 2', 'Petite description de l''offre pour le slider numéro 2.', 'detail/635');
+INSERT INTO arthurius.slider (image, title1, title2, description, link) VALUES ('slider3.jpg', 'HEY HEY LES GLAUDES !', 'Titre 2 du slider 3', 'Petite description de l''offre pour le slider numéro 3.', 'detail/635');
