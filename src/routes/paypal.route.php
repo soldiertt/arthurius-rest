@@ -6,9 +6,12 @@ $app->post('/checkout', function ($request, $response, $args) {
 
     $this->logger->info("/checkout /".json_encode($parsedCart));
 
-    $totalAmount = strval($parsedCart['totalAmount']);
-    $shipping = strval($parsedCart['shipping']);
-    $this->logger->info("total amount ".$totalAmount);
+    $totalAmount = $parsedCart['totalAmount'];
+    $subtotalAmount = $parsedCart['subtotalAmount'];
+    $shipping = $parsedCart['shipping'];
+    $promotion = $parsedCart['promoAmount'];
+
+    $this->logger->info("total amount ".strval($totalAmount));
 
     $token = getPaypalAccessToken();
     if (!$token) {
@@ -29,8 +32,13 @@ $app->post('/checkout', function ($request, $response, $args) {
         'transactions' => array(
             0 => array(
                 'amount' => array(
-                    'total' => $totalAmount,
-                    'currency' => 'EUR'
+                    'total' => strval($totalAmount),
+                    'currency' => 'EUR',
+                    'details' => array (
+                        'subtotal' => strval($subtotalAmount),
+                        'shipping' => strval($shipping),
+                        'shipping_discount' => strval($promotion)
+                    )
                 ),
                 'item_list' => array (
                     'items' => array()
@@ -51,19 +59,13 @@ $app->post('/checkout', function ($request, $response, $args) {
         ));
     }
 
-    array_push($body['transactions'][0]['item_list']['items'], array(
-        'quantity' => strval(1),
-        'name' => 'Shipping',
-        'price' => strval($shipping),
-        'currency' => 'EUR'
-    ));
-
     $curl = new Curl\Curl();
     $curl->setHeader('Content-Type', 'application/json');
     $curl->setHeader('Authorization', 'Bearer '.$token);
     $curl->post('https://api.sandbox.paypal.com/v1/payments/payment', json_encode($body) );
 
     if ($curl->error) {
+        $this->logger->error("/checkout /".$curl->response);
         return $response->withStatus(500)
             ->withHeader('Content-Type', 'application/json')
             ->write(json_encode(array('code' => $curl->error_code)));
