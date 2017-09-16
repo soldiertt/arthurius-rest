@@ -11,7 +11,13 @@ namespace Arthurius\model;
 
 class MailResponse
 {
+
     public $success = false;
 
     public $message = "";
+
+    public function __construct($success)
+    {
+        $this->success = $success;
+    }
 }
