@@ -19,6 +19,10 @@ class App {
     private static $DB_TEST_NAME;
     private static $DB_TEST_USER;
     private static $DB_TEST_PASS;
+    private static $DB_PROD_HOST;
+    private static $DB_PROD_NAME;
+    private static $DB_PROD_USER;
+    private static $DB_PROD_PASS;
     private static $DB_HOST;
     private static $DB_NAME;
     private static $DB_USER;
@@ -36,14 +40,23 @@ class App {
         self::$DB_TEST_NAME = 'arthurius';
         self::$DB_TEST_USER = Secrets::$TEST_DB_USER;
         self::$DB_TEST_PASS = Secrets::$TEST_DB_PASS;
+        self::$DB_PROD_HOST = 'arthuriuarthuriu.mysql.db';
+        self::$DB_PROD_NAME = 'arthuriuarthuriu';
+        self::$DB_PROD_USER = Secrets::$PROD_DB_USER;
+        self::$DB_PROD_PASS = Secrets::$PROD_DB_PASS;
     }
 
     public static function getDb() {
         if (self::$database === null) {
 
-            self::$env = getenv('ENV')?:'development';
+            self::$env = getenv('ENVIRONMENT') ?: 'development';
 
-            if (self::$env === 'test') {
+            if (self::$env === 'production') {
+                self::$DB_HOST = self::$DB_PROD_HOST;
+                self::$DB_NAME = self::$DB_PROD_NAME;
+                self::$DB_USER = self::$DB_PROD_USER;
+                self::$DB_PASS = self::$DB_PROD_PASS;
+            } else if (self::$env === 'test') {
                 self::$DB_HOST = self::$DB_TEST_HOST;
                 self::$DB_NAME = self::$DB_TEST_NAME;
                 self::$DB_USER = self::$DB_TEST_USER;
