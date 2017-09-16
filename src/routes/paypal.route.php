@@ -1,5 +1,6 @@
 <?php
 // Routes
+use Arthurius\model\EnvUtil;
 
 $app->post('/checkout', function ($request, $response, $args) {
     $parsedCart = $request->getParsedBody();
@@ -62,7 +63,7 @@ $app->post('/checkout', function ($request, $response, $args) {
     $curl = new Curl\Curl();
     $curl->setHeader('Content-Type', 'application/json');
     $curl->setHeader('Authorization', 'Bearer '.$token);
-    $curl->post('https://api.sandbox.paypal.com/v1/payments/payment', json_encode($body) );
+     $curl->post(EnvUtil::getPaypalUrl('payment'), json_encode($body) );
 
     if ($curl->error) {
         $this->logger->error("/checkout /".$curl->response);
@@ -103,7 +104,7 @@ $app->post('/execute-payment', function ($request, $response, $args) {
     $curl->setHeader('Content-Type', 'application/json');
     $curl->setHeader('Authorization', 'Bearer '.$token);
 
-    $postUrl = 'https://api.sandbox.paypal.com/v1/payments/payment/'.$paymentID.'/execute/';
+    $postUrl = EnvUtil::getPaypalUrl('payment').'/'.$paymentID.'/execute/';
 
     $this->logger->info("POST URL ".$postUrl);
 
@@ -134,7 +135,7 @@ $app->get('/payment-detail', function ($request, $response, $args) {
     $curl->setHeader('Content-Type', 'application/json');
     $curl->setHeader('Authorization', 'Bearer '.$token);
 
-    $getUrl = 'https://api.sandbox.paypal.com/v1/payments/payment/'.$paymentID;
+    $getUrl = EnvUtil::getPaypalUrl('payment').'/'.$paymentID;
 
     $this->logger->info("/payment-detail /".$getUrl);
 
@@ -154,13 +155,12 @@ $app->get('/payment-detail', function ($request, $response, $args) {
 
 function getPaypalAccessToken() {
     $curl = new Curl\Curl();
-    $curl->setBasicAuthentication('AWM97ZD5w8pGO3EeGBOPmJqCRAltflEBAVHO9W7Hp1nXa48_f1_vwnrfVfMqZyoGcw6Jf3qZvA2d_1j2', 'ELh-J0fF5lpiQ4S3y3H3FMg3VKJKSTIirxrBZeSykMZFQ9bAC7_3MfqtxeZtZDhAGGKNiNWw9JEbuPPt');
+    $curl->setBasicAuthentication(EnvUtil::getPaypalUser(), EnvUtil::getPaypalPassword());
     $curl->setHeader('Accept', 'application/json');
     $curl->setHeader('Accept-Language', 'en_US');
-    $curl->post('https://api.sandbox.paypal.com/v1/oauth2/token',  array(
-            'grant_type' => 'client_credentials'
-        )
-    );
+    $curl->post(EnvUtil::getPaypalUrl('oauth'),  array(
+        'grant_type' => 'client_credentials'
+    ));
 
     if ($curl->error) {
         return false;
