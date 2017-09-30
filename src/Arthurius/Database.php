@@ -44,7 +44,7 @@ class Database
         return $stmt->fetchAll();
     }
 
-    public function insert($sql, $attributes) {
+    public function insertOrUpdate($sql, $attributes) {
         return $this->getExecStatement($sql, $attributes);
     }
 

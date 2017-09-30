@@ -63,7 +63,7 @@ $app->post('/checkout', function ($request, $response, $args) {
     $curl = new Curl\Curl();
     $curl->setHeader('Content-Type', 'application/json');
     $curl->setHeader('Authorization', 'Bearer '.$token);
-     $curl->post(EnvUtil::getPaypalUrl('payment'), json_encode($body) );
+    $curl->post(EnvUtil::getPaypalUrl('payment'), json_encode($body) );
 
     if ($curl->error) {
         $this->logger->error("/checkout /".$curl->response);

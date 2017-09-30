@@ -16,7 +16,7 @@ namespace Arthurius\model;
      }
 
      public static function createOrder($order) {
-         return self::insert("INSERT INTO ".static::$table." (user_id, order_date, order_json) VALUES (?, ?, ?)", [$order['userId'], $order['orderDate'], $order['json']]);
+         return self::insertOrUpdate("INSERT INTO ".static::$table." (user_id, order_date, order_json) VALUES (?, ?, ?)", [$order['userId'], $order['orderDate'], $order['json']]);
      }
 
  }

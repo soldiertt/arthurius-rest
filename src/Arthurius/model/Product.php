@@ -43,19 +43,11 @@ EOD;
         FROM product
 EOD;
 
-    public static $SQL_TOP_SALES_LEAF_CATEGORY = <<<'EOD'
+    public static $SQL_TOP_SALES_BY_CATEGORY = <<<'EOD'
         SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         JOIN top_sales ON product.id = top_sales.product_id
-        WHERE type=?
-        ORDER BY top_sales.sales DESC
-EOD;
-
-    public static $SQL_TOP_SALES_ROOT_CATEGORY = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
-        FROM product
-        JOIN top_sales ON product.id = top_sales.product_id
-        WHERE type IN (SELECT type FROM section WHERE parent=?)
+        WHERE type = ? OR type IN (SELECT type FROM section WHERE parent=?)
         ORDER BY top_sales.sales DESC
 EOD;
 
@@ -89,13 +81,8 @@ EOD;
         return self::queryList(self::$SQL_ALL_BRANDS);
     }
 
-    public static function findTopSalesByLeafCategory($category) {
-        $products = self::queryList(self::$SQL_TOP_SALES_LEAF_CATEGORY, [$category]);
-        return self::mapProductArray($products);
-    }
-
-    public static function findTopSalesByRootCategory($category) {
-        $products = self::queryList(self::$SQL_TOP_SALES_ROOT_CATEGORY, [$category]);
+    public static function findTopSalesByCategory($category) {
+        $products = self::queryList(self::$SQL_TOP_SALES_BY_CATEGORY, [$category, $category]);
         return self::mapProductArray($products);
     }
 

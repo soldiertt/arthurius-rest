@@ -7,6 +7,7 @@
  */
 
 use Arthurius\model\Product;
+use Arthurius\model\TopSales;
 
 $app->get('/product', function ($request, $response, $args) {
     $category = $request->getQueryParam("category");
@@ -53,18 +54,24 @@ $app->get('/product/brands', function ($request, $response, $args) {
 });
 
 $app->get('/product/top', function ($request, $response, $args) {
-    $leafCategory = $request->getQueryParam("leafCategory");
-    $rootCategory = $request->getQueryParam("rootCategory");
+    $category = $request->getQueryParam("category");
     $this->logger->info("Slim-Skeleton '/product/top'");
-    $products = [];
-    if ($leafCategory) {
-        $products = Product::findTopSalesByLeafCategory($leafCategory);
-    } else if ($rootCategory) {
-        $products = Product::findTopSalesByRootCategory($rootCategory);
-    }
+    $products = Product::findTopSalesByCategory($category);
+
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($products));
+});
+
+$app->post('/product/top', function ($request, $response, $args) {
+    $orders = $request->getParsedBody();
+    $this->logger->info("Slim-Skeleton 'post /product/top '".json_encode($orders));
+
+    $ok = TopSales::updateTopSales($orders);
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($ok));
 });
 
 $app->get('/product/{id}', function ($request, $response, $args) {

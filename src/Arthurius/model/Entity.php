@@ -30,7 +30,7 @@ class Entity
         return App::getDb()->queryList($statement, get_called_class(), $attributes);
     }
 
-    public static function insert($statement, $attributes) {
-        return App::getDb()->insert($statement, $attributes);
+    public static function insertOrUpdate($statement, $attributes) {
+        return App::getDb()->insertOrUpdate($statement, $attributes);
     }
 }
