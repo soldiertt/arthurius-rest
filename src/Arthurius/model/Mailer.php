@@ -15,25 +15,26 @@ class Mailer {
 
      public static function sendMail($userId, $userInfo, $mail) {
 
-         $replyto = Secrets::$MAIL_FROM;
-         $body = self::computeMailBody($userId, $userInfo, $mail);
-
-         $headers ='From: '.$replyto."\n";
-         $headers .='Reply-To: '.$replyto."\n";
-         $headers .='Content-Type: text/html; charset=utf-8'."\n";
-         $headers .='Content-Transfer-Encoding: 8bit';
-
+         $replyTo = Secrets::$MAIL_FROM;
+         $lang = $mail['parameters']['language'] ?: 'fr';
+         $subject = self::computeMailSubject($mail, $lang);
+         $body = self::computeMailBody($userId, $userInfo, $mail, $lang);
          $env = getenv('ENVIRONMENT') ?: 'development';
 
          if ($env != 'development') {
-             $success = mail(self::computeMailTo($mail, $userInfo), self::computeMailSubject($mail), $body, $headers);
-             return new MailResponse($success);
+             $headers ='From: '.$replyTo."\n";
+             $headers .='Reply-To: '.$replyTo."\n";
+             $headers .='Content-Type: text/html; charset=utf-8'."\n";
+             $headers .='Content-Transfer-Encoding: 8bit';
+
+             $success = mail(self::computeMailTo($mail, $userInfo), $subject, $body, $headers);
+             return new MailResponse($success, "Mail sent.");
          } else {
              return new MailResponse(true, $body);
          }
      }
 
-    private static function computeMailBody($userId, $userInfo, $mail) {
+    private static function computeMailBody($userId, $userInfo, $mail, $lang) {
 
         $body = null;
         switch ($mail['template']) {
@@ -54,17 +55,15 @@ class Mailer {
                 self::fillMailTemplate($body, $userInfo, $cart, "fr");
                 break;
             case "USER_PAYMENT_CONFIRMATION":
-                $lang = $mail['parameters']['language'];
                 switch ($lang) {
+                    case "fr":
+                        $body = file_get_contents(__DIR__ . '/../mailtemplates/user_payment_confirmation_fr.html');
+                        break;
                     case "nl":
                         $body = file_get_contents(__DIR__ . '/../mailtemplates/user_payment_confirmation_nl.html');
                         break;
                     case "en":
                         $body = file_get_contents(__DIR__ . '/../mailtemplates/user_payment_confirmation_en.html');
-                        break;
-                    default:
-                        $body = file_get_contents(__DIR__ . '/../mailtemplates/user_payment_confirmation_fr.html');
-                        $lang = "fr";
                         break;
                 }
                 $cart = json_decode($mail['parameters']['paypalOrder']['json']);
@@ -88,6 +87,7 @@ class Mailer {
         $body = str_replace('%subtotal%', $subtotal, $body);
         $body = str_replace('%shipping%', $shipping, $body);
         if ($discount !== null && $discount !== "0.00") {
+            $discountLabel = "";
             switch ($lang) {
                 case "fr":
                     $discountLabel = "Réduction";
@@ -101,6 +101,8 @@ class Mailer {
             }
             $discountRowHtml = "<tr><td colspan='2' class='footer-label'>".$discountLabel."</td><td>".$discount." EUR</td></tr>";
             $body = str_replace('%discountRow%', $discountRowHtml, $body);
+        } else {
+            $body = str_replace('%discountRow%', "", $body);
         }
         $body = str_replace('%total%', $total, $body);
         $cartArticles = self::orderToHtmlRows($cart);
@@ -131,7 +133,7 @@ class Mailer {
         return $html;
     }
 
-    private static function computeMailSubject($mail) {
+    private static function computeMailSubject($mail, $lang) {
         $subject = null;
         switch ($mail['template']) {
             case "ACCOUNT_DELETION":
@@ -144,7 +146,17 @@ class Mailer {
                 $subject = "[Arthurius] Nouvelle commande";
                 break;
             case "USER_PAYMENT_CONFIRMATION":
-                $subject = "Confirmation de votre commande Arthurius";
+                switch ($lang) {
+                    case "fr":
+                        $subject = "Confirmation de votre commande Arthurius";
+                        break;
+                    case "nl":
+                        $subject = "Bevestiging van uw bestelling bij Arthurius";
+                        break;
+                    case "en":
+                        $subject = "Confirmation of your order at Arthurius";
+                        break;
+                }
                 break;
         }
         return $subject;
