@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin payment confirmation</title>
+    <style>
+        body {
+            font-family: Verdana;
+            background-color: #666666;
+            color: #343a40;
+        }
+        .container {
+            margin:auto;
+            max-width: 700px;
+            background-color: #fff;
+            padding: 10px 20px;
+        }
+        header {
+            text-align: center;
+        }
+        section {
+            margin-top: 15px;
+            border:1px solid #dc4823;
+        }
+        .section-content {
+            padding: 20px;
+        }
+        h1 {
+            font-size: 25px;
+            color: #fff;
+            text-align: center;
+            background-color: #666666;
+            padding: 10px 20px;
+        }
+        h2 {
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 20px;
+            background-color: #dc4823;
+            padding: 5px 10px;
+        }
+        .item-list {
+            list-style: none;
+        }
+        .item-list label {
+            display: table-cell;
+            min-width: 180px;
+            text-align: right;
+            padding-right: 20px;
+        }
+        .item-list .value {
+            display: table-cell;
+            font-weight: bold;
+        }
+        .cart {
+            border: 2px solid #666;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #eee;
+            color: #343a40;
+        }
+        .cart td, .cart th {
+            border: 1px solid #666;
+            padding: 7px;
+            text-align: center;
+        }
+        .cart .footer-label {
+            text-align: right;
+        }
+        .cart .total-label {
+            font-weight: bold;
+        }
+        .cart .total {
+            font-weight: bold;
+        }
+        footer {
+            margin: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+        footer a {
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="http://www.arthurius.be/assets/images/logo.png" alt="Arthurius">
+            <h1>Nouvelle commande</h1>
+        </header>
+        <section>
+            <h2>Client</h2>
+            <ul class="item-list">
+                <li><label>Identifiant :</label><span class="value">%userId%</span></li>
+                <li><label>Nom :</label><span class="value">%userFullname%</span></li>
+                <li><label>Email :</label><span class="value">%userEmail%</span></li>
+                <li><label>Adresse :</label><span class="value">%userAddress%</span></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Commande</h2>
+            <div class="section-content">
+                <table class="cart">
+                    <thead>
+                        <tr><th>Article</th><th>Quantité</th><th>Prix</th></tr>
+                    </thead>
+                    <tbody>
+                        %cartArticles%
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan='2' class="footer-label">Sous-total</td>
+                            <td>%subtotal% EUR</td>
+                        </tr>
+                        %discountRow%
+                        <tr>
+                            <td colspan='2' class="footer-label">Frais de livraison</td>
+                            <td>%shipping% EUR</td>
+                        </tr>
+                        <tr>
+                            <td colspan='2' class="footer-label total-label">Total</td>
+                            <td class="total">%total% EUR</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+        <footer>
+            <a href="http://www.arthurius.be">Arthurius</a> © All rights Reseverd
+        </footer>
+    </div>
+</body>
+</html>

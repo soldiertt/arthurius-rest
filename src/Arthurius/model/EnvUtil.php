@@ -49,4 +49,17 @@ class EnvUtil {
 
         return $pass;
     }
+
+    public static function getAdminMailTo() {
+        $env = getenv('ENVIRONMENT') ?: 'development';
+
+        $mailto = Secrets::$LOCAL_MAIL_TO;
+        if ($env === 'production') {
+            $mailto = Secrets::$PROD_MAIL_TO;
+        } else if ($env === 'test') {
+            $mailto = Secrets::$TEST_MAIL_TO;
+        }
+
+        return $mailto;
+    }
 }
