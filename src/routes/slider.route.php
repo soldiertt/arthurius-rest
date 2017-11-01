@@ -17,3 +17,39 @@ $app->get('/slider', function ($request, $response, $args) {
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($slides));
 });
+
+$app->post('/slider', function ($request, $response, $args) {
+    $slide = $request->getParsedBody();
+
+    $this->logger->info("Slim-Skeleton 'post /slider/");
+    $id = Slider::create($slide);
+
+    $slide['id'] = $id;
+
+    return $response->withStatus(201)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($slide));
+});
+
+$app->put('/slider/{id}', function ($request, $response, $args) {
+    $id = $request->getAttribute('id');
+    $slide = $request->getParsedBody();
+
+    $this->logger->info("Slim-Skeleton 'put /slider/".$id);
+    $ok = Slider::update($id, $slide);
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($ok));
+});
+
+$app->delete('/slider/{id}', function ($request, $response, $args) {
+    $id = $request->getAttribute('id');
+
+    $this->logger->info("Slim-Skeleton 'delete /slider/".$id);
+    $ok = Slider::delete($id);
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($ok));
+});

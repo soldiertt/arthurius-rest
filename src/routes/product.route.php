@@ -17,6 +17,8 @@ $app->get('/product', function ($request, $response, $args) {
         $products = Product::findByCategory($category);
     } else if ($brand) {
         $products = Product::findByBrand($brand);
+    } else {
+        $products = Product::findAll();
     }
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
@@ -86,7 +88,7 @@ $app->post('/product/top', function ($request, $response, $args) {
 
 $app->get('/product/{id}', function ($request, $response, $args) {
     $id = $request->getAttribute('id');
-    $this->logger->info("Slim-Skeleton '/product/".$id);
+    $this->logger->info("Slim-Skeleton 'get /product/".$id);
     $product = Product::find($id);
     if ($product === false) {
         return notFound($response, "Could not find product with id ".$id);
@@ -95,4 +97,41 @@ $app->get('/product/{id}', function ($request, $response, $args) {
             ->withHeader('Content-Type', 'application/json')
             ->write(json_encode($product));
     }
+});
+
+$app->post('/product', function ($request, $response, $args) {
+    $product = $request->getParsedBody();
+
+    $this->logger->info("Slim-Skeleton 'post /product/");
+    $id = Product::create($product);
+
+    $product['id'] = $id;
+
+    return $response->withStatus(201)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($product));
+});
+
+$app->put('/product/{id}', function ($request, $response, $args) {
+    $id = $request->getAttribute('id');
+    $product = $request->getParsedBody();
+
+    $this->logger->info("Slim-Skeleton 'put /product/".$id);
+
+    $ok = Product::update($id, $product);
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($ok));
+});
+
+$app->delete('/product/{id}', function ($request, $response, $args) {
+    $id = $request->getAttribute('id');
+
+    $this->logger->info("Slim-Skeleton 'delete /product/".$id);
+    $ok = Product::delete($id);
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($ok));
 });

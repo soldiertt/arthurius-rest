@@ -22,6 +22,10 @@ class Entity
         return self::queryOne("SELECT * FROM ".static::$table." WHERE id= ?", [$id]);
     }
 
+    public static function delete($id) {
+        return self::insertOrUpdate("DELETE FROM ".static::$table." WHERE id= ?", [$id]);
+    }
+
     public static function queryOne($statement, $attributes = null) {
         return App::getDb()->queryOne($statement, get_called_class(), $attributes);
     }
@@ -30,7 +34,11 @@ class Entity
         return App::getDb()->queryList($statement, get_called_class(), $attributes);
     }
 
-    public static function insertOrUpdate($statement, $attributes) {
-        return App::getDb()->insertOrUpdate($statement, $attributes);
+    public static function insertOrUpdate($statement, $attributes, $isInsert = false) {
+        return App::getDb()->insertOrUpdate($statement, $attributes, $isInsert);
+    }
+
+    public static function toMysqlInt($value) {
+        return (int)boolval($value);
     }
 }

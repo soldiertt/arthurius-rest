@@ -15,31 +15,42 @@ class Product extends Entity
     public static $table = "product";
 
     public static $SQL_FIND_BY_CATEGORY = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product WHERE type=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_FIND_BY_BRAND = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product WHERE marque=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_SEARCH = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         WHERE marque like ? OR name like ? OR description like ? or manche like ?
 EOD;
 
     public static $SQL_PROMO = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         WHERE promo = true
 EOD;
 
+    public static $SQL_CREATE = <<<'EOD'
+        INSERT INTO product (type, marque, name, description, picture, manche, acier, size, youtube_ref, 
+          price, comment, promo, old_price, instock)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+EOD;
+
+    public static $SQL_UPDATE = <<<'EOD'
+        UPDATE product SET type= ?, marque = ?, name = ?, description = ?, picture = ?, manche = ?, 
+          acier = ?, size = ?, youtube_ref = ?, price = ?, comment = ?, promo = ?, old_price = ?, instock = ? WHERE id = ?
+EOD;
+
     public static $SQL_SLIDER = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product p, slider_product sp
         WHERE p.id = sp.product_id
 EOD;
@@ -50,12 +61,17 @@ EOD;
 EOD;
 
     public static $SQL_TOP_SALES_BY_CATEGORY = <<<'EOD'
-        SELECT id, ref, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         JOIN top_sales ON product.id = top_sales.product_id
         WHERE type = ? OR type IN (SELECT type FROM section WHERE parent=?)
         ORDER BY top_sales.sales DESC
 EOD;
+
+    public static function findAll() {
+        $products = parent::all();
+        return self::mapProductArray($products);
+    }
 
     public static function find($id) {
         $product = parent::find($id);
@@ -95,6 +111,26 @@ EOD;
     public static function findTopSalesByCategory($category) {
         $products = self::queryList(self::$SQL_TOP_SALES_BY_CATEGORY, [$category, $category]);
         return self::mapProductArray($products);
+    }
+
+    public static function create($product) {
+        return self::insertOrUpdate(self::$SQL_CREATE,
+            [
+                $product['type'], $product['marque'], $product['name'],
+                $product['description'], $product['picture'], $product['manche'], $product['acier'], $product['size'],
+                $product['youtube_ref'], $product['price'], $product['comment'], self::toMysqlInt($product['promo']),
+                $product['old_price'], self::toMysqlInt($product['instock'])
+            ], true);
+    }
+
+    public static function update($id, $product) {
+        return self::insertOrUpdate(self::$SQL_UPDATE,
+            [
+                $product['type'], $product['marque'], $product['name'],
+                $product['description'], $product['picture'], $product['manche'], $product['acier'], $product['size'],
+                $product['youtube_ref'], $product['price'], $product['comment'], self::toMysqlInt($product['promo']),
+                $product['old_price'], self::toMysqlInt($product['instock']), $id
+            ]);
     }
 
     public static function debug_to_console($data) {

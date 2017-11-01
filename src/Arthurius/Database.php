@@ -44,8 +44,8 @@ class Database
         return $stmt->fetchAll();
     }
 
-    public function insertOrUpdate($sql, $attributes) {
-        return $this->getExecStatement($sql, $attributes);
+    public function insertOrUpdate($sql, $attributes, $isInsert = false) {
+        return $this->getExecStatement($sql, $attributes, $isInsert);
     }
 
     private function getReadStatement($sql, $className, $attributes) {
@@ -59,12 +59,16 @@ class Database
         return $stmt;
     }
 
-    private function getExecStatement($sql, $attributes) {
+    private function getExecStatement($sql, $attributes, $isInsert = false) {
         $stmt = $this->getPDO()->prepare($sql);
         if ($attributes != null) {
-            return $stmt->execute($attributes);
+            $status = $stmt->execute($attributes);
+            if ($isInsert) {
+                return $this->getPDO()->lastInsertId();
+            }
         } else {
-            return $stmt->execute();
+            $status = $stmt->execute();
         }
+        return $status;
     }
 }

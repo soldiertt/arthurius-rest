@@ -12,11 +12,13 @@ $app->post('/order', function ($request, $response, $args) {
     $order = $request->getParsedBody();
     $this->logger->info("Slim-Skeleton 'post /order '".json_encode($order));
 
-    $ok = Order::createOrder($order);
+    $id = Order::createOrder($order);
+
+    $order['id'] = $id;
 
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
-        ->write(json_encode($ok));
+        ->write(json_encode($order));
 });
 
 
