@@ -19,6 +19,11 @@ $app->get('/slider', function ($request, $response, $args) {
 });
 
 $app->post('/slider', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $slide = $request->getParsedBody();
 
     $this->logger->info("Slim-Skeleton 'post /slider/");
@@ -32,6 +37,11 @@ $app->post('/slider', function ($request, $response, $args) {
 });
 
 $app->put('/slider/{id}', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $id = $request->getAttribute('id');
     $slide = $request->getParsedBody();
 
@@ -44,6 +54,11 @@ $app->put('/slider/{id}', function ($request, $response, $args) {
 });
 
 $app->delete('/slider/{id}', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $id = $request->getAttribute('id');
 
     $this->logger->info("Slim-Skeleton 'delete /slider/".$id);

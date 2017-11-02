@@ -100,6 +100,11 @@ $app->get('/product/{id}', function ($request, $response, $args) {
 });
 
 $app->post('/product', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $product = $request->getParsedBody();
 
     $this->logger->info("Slim-Skeleton 'post /product/");
@@ -113,6 +118,11 @@ $app->post('/product', function ($request, $response, $args) {
 });
 
 $app->put('/product/{id}', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $id = $request->getAttribute('id');
     $product = $request->getParsedBody();
 
@@ -126,6 +136,11 @@ $app->put('/product/{id}', function ($request, $response, $args) {
 });
 
 $app->delete('/product/{id}', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $id = $request->getAttribute('id');
 
     $this->logger->info("Slim-Skeleton 'delete /product/".$id);

@@ -7,6 +7,7 @@
  */
 
 use Arthurius\model\Brand;
+use Arthurius\model\Authorization;
 
 $app->get('/brand', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton 'get /brand '");
@@ -19,6 +20,11 @@ $app->get('/brand', function ($request, $response, $args) {
 });
 
 $app->post('/brand', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $brand = $request->getParsedBody();
     $this->logger->info("Slim-Skeleton 'post /brand '".json_encode($brand));
 
@@ -32,6 +38,11 @@ $app->post('/brand', function ($request, $response, $args) {
 });
 
 $app->delete('/brand/{id}', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
     $id = $request->getAttribute('id');
     $this->logger->info("Slim-Skeleton 'delete /brand '".$id);
 
