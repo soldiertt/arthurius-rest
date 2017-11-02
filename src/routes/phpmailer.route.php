@@ -11,7 +11,7 @@ use Arthurius\model\Mailer;
 $app->post('/mail', function ($request, $response, $args) {
 
     $mail = $request->getParsedBody();
-    $userId = $request->getHeader("X-Arth-User-Identifier")[0];
+    $userId = $request->getHeader("X-Arth-UserId")[0];
     $this->logger->info("Slim-Skeleton 'post /mail '".json_encode($mail));
 
     $env = getenv('ENVIRONMENT') ?: 'development';

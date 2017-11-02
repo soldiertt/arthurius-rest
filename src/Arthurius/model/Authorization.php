@@ -12,7 +12,7 @@ namespace Arthurius\model;
 class Authorization
 {
     public static function checkIsAdmin($request) {
-        $headerUserId = $request->getHeaderLine('X-Arth-UserId');
+        $headerUserId = $request->getHeader('X-Arth-UserId')[0];
         if ($headerUserId != null) {
             return $headerUserId == 'google-oauth2|116562219924228798186' ||
                 $headerUserId == 'auth0|5920c0dc549d1f23d38b08d3' ||
