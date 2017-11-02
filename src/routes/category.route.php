@@ -8,7 +8,7 @@
 
 
 use Arthurius\model\Category;
-
+use Arthurius\model\Authorization;
 
 $app->get('/category', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton 'get /category");

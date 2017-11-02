@@ -7,6 +7,7 @@
  */
 
 use Arthurius\model\Slider;
+use Arthurius\model\Authorization;
 
 $app->get('/slider', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton 'get /slider '");

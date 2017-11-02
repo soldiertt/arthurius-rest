@@ -8,6 +8,7 @@
 
 use Arthurius\model\Product;
 use Arthurius\model\TopSales;
+use Arthurius\model\Authorization;
 
 $app->get('/product', function ($request, $response, $args) {
     $category = $request->getQueryParam("category");
