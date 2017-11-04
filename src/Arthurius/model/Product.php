@@ -49,12 +49,6 @@ EOD;
           acier = ?, size = ?, youtube_ref = ?, price = ?, comment = ?, promo = ?, old_price = ?, instock = ? WHERE id = ?
 EOD;
 
-    public static $SQL_SLIDER = <<<'EOD'
-        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
-        FROM product p, slider_product sp
-        WHERE p.id = sp.product_id
-EOD;
-
     public static $SQL_ALL_BRANDS = <<<'EOD'
         SELECT distinct (marque)
         FROM product
@@ -96,11 +90,6 @@ EOD;
 
     public static function findPromo() {
         $products = self::queryList(self::$SQL_PROMO);
-        return self::mapProductArray($products);
-    }
-
-    public static function findSlider() {
-        $products = self::queryList(self::$SQL_SLIDER);
         return self::mapProductArray($products);
     }
 

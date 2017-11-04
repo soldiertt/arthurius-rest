@@ -46,16 +46,6 @@ $app->get('/product/promo', function ($request, $response, $args) {
 
 });
 
-$app->get('/product/slider', function ($request, $response, $args) {
-    $this->logger->info("Slim-Skeleton '/product/slider");
-    $products = Product::findSlider();
-
-    return $response->withStatus(200)
-        ->withHeader('Content-Type', 'application/json')
-        ->write(json_encode($products));
-
-});
-
 $app->get('/product/brands', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton '/product/brands");
     $brands = Product::findAllBrands();
