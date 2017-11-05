@@ -111,6 +111,7 @@ $app->post('/execute-payment', function ($request, $response, $args) {
     $curl->post($postUrl, json_encode($body));
 
     if ($curl->error) {
+        $this->logger->error($curl->response);
         return $response->withStatus(500)
             ->withHeader('Content-Type', 'application/json')
             ->write(json_encode(array('code' => $curl->error_code )));

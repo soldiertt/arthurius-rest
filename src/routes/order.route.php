@@ -7,6 +7,27 @@
  */
 
 use Arthurius\model\Order;
+use Arthurius\model\Authorization;
+
+$app->get('/order', function ($request, $response, $args) {
+    $userId = $request->getQueryParam('userId');
+    $this->logger->info("Slim-Skeleton 'get /order '");
+
+    if ($userId != null) {
+        $orders = Order::allOrdersByUser($userId);
+    } else {
+
+        if (!Authorization::checkIsAdmin($request)) {
+            return Authorization::forbidden($response);
+        }
+
+        $orders = Order::all();
+    }
+
+    return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($orders));
+});
 
 $app->post('/order', function ($request, $response, $args) {
     $order = $request->getParsedBody();
@@ -19,16 +40,4 @@ $app->post('/order', function ($request, $response, $args) {
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($order));
-});
-
-
-$app->get('/order', function ($request, $response, $args) {
-    $userId = $request->getQueryParam('userId');
-    $this->logger->info("Slim-Skeleton 'get /order '".json_encode($userId));
-
-    $orders = Order::allOrdersByUser($userId);
-
-    return $response->withStatus(200)
-        ->withHeader('Content-Type', 'application/json')
-        ->write(json_encode($orders));
 });

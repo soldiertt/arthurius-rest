@@ -6,6 +6,43 @@
  * Time: 22:48
  */
 
+use Arthurius\model\Authorization;
+
+$app->get('/user', function ($request, $response, $args) {
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
+    $getUrl = 'https://soldiertt.eu.auth0.com/api/v2/users?sort=last_login:-1';
+
+    $this->logger->info("Slim-Skeleton 'get /user '");
+
+    $token = getAuth0AccessToken();
+
+    if (!$token) {
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('message' => 'Erreur lors de la récupération du token' )));
+    };
+
+    $curl = new Curl\Curl();
+    $curl->setHeader('Content-Type', 'application/json');
+    $curl->setHeader('Authorization', 'Bearer '.$token);
+    $curl->get($getUrl);
+
+    if ($curl->error) {
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('code' => $curl->error_code, 'message' => $curl->response)));
+    } else {
+
+        return $response->withStatus(200)
+            ->withHeader('Content-Type', 'application/json')
+            ->write($curl->response);
+    }
+});
+
 $app->get('/user/{userId}', function ($request, $response, $args) {
     $userId = $request->getAttribute('userId');
     $getUrl = 'https://soldiertt.eu.auth0.com/api/v2/users/'.urlencode($userId);
