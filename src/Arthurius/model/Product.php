@@ -63,7 +63,7 @@ EOD;
 EOD;
 
     public static function findAll() {
-        $products = parent::all();
+        $products = self::queryList("SELECT * FROM ".static::$table." ORDER BY marque");
         return self::mapProductArray($products);
     }
 
