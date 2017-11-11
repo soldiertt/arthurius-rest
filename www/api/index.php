@@ -35,7 +35,6 @@ require __DIR__ . '/../../src/routes/slider.route.php';
 require __DIR__ . '/../../src/routes/brand.route.php';
 require __DIR__ . '/../../src/routes/slideproduct.route.php';
 require __DIR__ . '/../../src/routes/steel.route.php';
-require __DIR__ . '/../../src/routes/upload.route.php';
 
 // Run app
 $app->run();

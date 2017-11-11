@@ -11,38 +11,60 @@ use Slim\Http\UploadedFile;
 
  class Uploader {
 
-     public static function upload($request) {
-         $directory = '../assets/photos';
+     const PRODUCT_TYPE = 1;
+     const SLIDE_TYPE = 2;
+
+     public static function upload($request, $type) {
+
+         switch ($type) {
+             case self::PRODUCT_TYPE:
+                 $directory = '../assets/photos';
+                 break;
+             case self::SLIDE_TYPE:
+                 $directory = '../assets/images';
+                 break;
+             default:
+                 return false;
+         }
 
          $filename = $request->getParam('filename');
 
          $exploded_filename = explode(".", $filename);
          $extension = end($exploded_filename);
-         $basename = basename($filename, ".".$extension );
+         $basename = basename($filename, "." . $extension);
 
-         $category = $request->getParam('category');
          $uploadedFiles = $request->getUploadedFiles();
+
+         if ($type == self::PRODUCT_TYPE) {
+             $category = $request->getParam('category');
+             $directory .= DIRECTORY_SEPARATOR . $category;
+         }
 
          // handle single input with single file upload
          $uploadedFile = $uploadedFiles['picture'];
+
          if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
-             self::moveUploadedFile($directory, $uploadedFile, $category, $filename);
-             self::makeThumbnail($directory, $category, $filename, $basename, $extension);
+             self::moveUploadedFile($directory, $uploadedFile, $filename);
+             if ($type == self::PRODUCT_TYPE) {
+                 self::makeThumbnail($directory, $filename, $basename, $extension);
+             }
              return true;
          } else {
              return false;
          }
      }
 
-     private static function moveUploadedFile($directory, UploadedFile $uploadedFile, $category, $filename) {
-        mkdir($directory . DIRECTORY_SEPARATOR . $category, 0777, true);
-        $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $category . DIRECTORY_SEPARATOR . $filename);
+     private static function moveUploadedFile($directory, UploadedFile $uploadedFile, $filename) {
+         if (!is_dir($directory)) {
+             mkdir($directory, 0777, true);
+         }
+        $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
      }
 
-     private static function makeThumbnail($directory, $category, $filename, $basename, $extension) {
+     private static function makeThumbnail($directory, $filename, $basename, $extension) {
          $thumb_suffix = "m";
-         $filepath = "$directory/$category/$filename";
-         $thumbfilepath = "$directory/$category/$basename$thumb_suffix.$extension";
+         $filepath = "$directory/$filename";
+         $thumbfilepath = "$directory/$basename$thumb_suffix.$extension";
          $thumbnail_width = 150;
          $thumbnail_height = 100;
          $arr_image_details = getimagesize($filepath); // pass id to thumb name

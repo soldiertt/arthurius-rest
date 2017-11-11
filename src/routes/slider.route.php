@@ -8,6 +8,7 @@
 
 use Arthurius\model\Slider;
 use Arthurius\model\Authorization;
+use Arthurius\model\Uploader;
 
 $app->get('/slider', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton 'get /slider '");
@@ -68,4 +69,24 @@ $app->delete('/slider/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($ok));
+});
+
+$app->post('/slider/upload', function ($request, $response, $args) {
+    $this->logger->info("Slim-Skeleton 'post /slider/upload'");
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
+    $ok = Uploader::upload($request, Uploader::SLIDE_TYPE);
+
+    if ($ok) {
+        return $response->withStatus(200)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('status' => $ok)));
+    } else {
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('status' => $ok)));
+    }
 });

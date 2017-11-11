@@ -9,6 +9,7 @@
 use Arthurius\model\Product;
 use Arthurius\model\TopSales;
 use Arthurius\model\Authorization;
+use Arthurius\model\Uploader;
 
 $app->get('/product', function ($request, $response, $args) {
     $category = $request->getQueryParam("category");
@@ -140,4 +141,24 @@ $app->delete('/product/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($ok));
+});
+
+$app->post('/product/upload', function ($request, $response, $args) {
+    $this->logger->info("Slim-Skeleton 'post /product/upload'");
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
+    $ok = Uploader::upload($request, Uploader::PRODUCT_TYPE);
+
+    if ($ok) {
+        return $response->withStatus(200)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('status' => $ok)));
+    } else {
+        return $response->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode(array('status' => $ok)));
+    }
 });
