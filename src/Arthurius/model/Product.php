@@ -51,7 +51,7 @@ EOD;
 
     public static $SQL_ALL_BRANDS = <<<'EOD'
         SELECT distinct (marque)
-        FROM product
+        FROM product ORDER BY LOWER(marque)
 EOD;
 
     public static $SQL_TOP_SALES_BY_CATEGORY = <<<'EOD'
@@ -94,7 +94,8 @@ EOD;
     }
 
     public static function findAllBrands() {
-        return self::queryList(self::$SQL_ALL_BRANDS);
+        $brands = self::queryList(self::$SQL_ALL_BRANDS);
+        return self::mapBrandArray($brands);
     }
 
     public static function findTopSalesByCategory($category) {
@@ -138,5 +139,16 @@ EOD;
 
     public static function mapProductArray($products) {
         return array_map("self::mapProduct", $products);
+    }
+
+    public static function mapBrand($brand) {
+        return array(
+            'id' => base64_encode($brand->marque),
+            'marque' => $brand->marque
+        );
+    }
+
+    public static function mapBrandArray($brands) {
+        return array_map("self::mapBrand", $brands);
     }
 }

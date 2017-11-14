@@ -22,7 +22,7 @@ EOD;
      public static function mapSteel($steel) {
          return array(
              'id' => base64_encode($steel->acier),
-             'name' => $steel->acier,
+             'name' => $steel->acier
          );
      }
 
