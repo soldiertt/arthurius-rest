@@ -103,6 +103,39 @@ EOD;
         return self::mapProductArray($products);
     }
 
+    public static function exportProducts($category, $brand, $steel, $promo, $instock) {
+        $where = "WHERE 1 = 1";
+        $params = array();
+
+        if (isset($category)) {
+            $where .= " AND type = ?";
+            array_push($params, $category);
+        }
+        if (isset($brand)) {
+            $where .= " AND marque = ?";
+            array_push($params, $brand);
+        }
+        if (isset($steel)) {
+            $where .= " AND acier = ?";
+            array_push($params, $steel);
+        }
+        if (isset($promo)) {
+            $where .= " AND promo = ?";
+            array_push($params, self::toMysqlInt($promo));
+        }
+        if (isset($instock)) {
+            $where .= " AND instock = ?";
+            array_push($params, self::toMysqlInt($instock));
+        }
+
+        $SQL = "SELECT id, type, marque, name, picture, manche, acier, size, youtube_ref, "
+            ."promo, price, old_price, instock, comment "
+            ."FROM product $where ORDER BY marque, name";
+
+        return self::exec($SQL, $params);
+
+    }
+
     public static function create($product) {
         return self::insertOrUpdate(self::$SQL_CREATE,
             [

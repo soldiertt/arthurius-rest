@@ -38,7 +38,12 @@ class Entity
         return App::getDb()->insertOrUpdate($statement, $attributes, $isInsert);
     }
 
-    public static function toMysqlInt($value) {
-        return (int)boolval($value);
+    public static function exec($statement, $attributes) {
+        return App::getDb()->exec($statement, $attributes);
     }
+
+    public static function toMysqlInt($value) {
+        return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
 }

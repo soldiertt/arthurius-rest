@@ -10,6 +10,7 @@ use Arthurius\model\Product;
 use Arthurius\model\TopSales;
 use Arthurius\model\Authorization;
 use Arthurius\model\Uploader;
+use Arthurius\model\Exporter;
 
 $app->get('/product', function ($request, $response, $args) {
     $category = $request->getQueryParam("category");
@@ -65,6 +66,31 @@ $app->get('/product/top', function ($request, $response, $args) {
     return $response->withStatus(200)
         ->withHeader('Content-Type', 'application/json')
         ->write(json_encode($products));
+});
+
+$app->get('/product/export', function ($request, $response, $args) {
+    $this->logger->info("Slim-Skeleton 'get /product/export'");
+
+    if (!Authorization::checkIsAdmin($request)) {
+        return Authorization::forbidden($response);
+    }
+
+    $category = $request->getQueryParam("category");
+    $brand = $request->getQueryParam("brand");
+    $steel = $request->getQueryParam("steel");
+    $promo = $request->getQueryParam("promo");
+    $instock = $request->getQueryParam("instock");
+
+    $fileName = 'exp_products_'.date('Ymd_His').'.csv';
+
+    $csvString = Exporter::export($category, $brand, $steel, $promo, $instock);
+
+    $response->getBody()->write($csvString);
+    $response = $response->withHeader('Content-Description', 'File Transfer')
+        ->withHeader('Content-Type', 'text/csv')
+        ->withHeader('Content-Disposition', "attachment;filename=\"$fileName\"");
+
+    return $response;
 });
 
 $app->post('/product/top', function ($request, $response, $args) {
