@@ -87,8 +87,9 @@ $app->get('/product/export', function ($request, $response, $args) {
 
     $response->getBody()->write($csvString);
     $response = $response->withHeader('Content-Description', 'File Transfer')
+        ->withHeader('Access-Control-Expose-Headers', 'Content-Disposition')
         ->withHeader('Content-Type', 'text/csv')
-        ->withHeader('Content-Disposition', "attachment;filename=\"$fileName\"");
+        ->withHeader('Content-Disposition', "attachment;filename=$fileName");
 
     return $response;
 });
