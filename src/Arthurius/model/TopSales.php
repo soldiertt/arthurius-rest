@@ -26,13 +26,14 @@ EOD;
          foreach($orders as $order) {
              $count = $order['count'];
              $articleId = $order['article']['id'];
+             $ok = self::insertOrUpdate("UPDATE product SET instock = 0 WHERE id= ?", [$articleId]);
              $topSale = self::findTopSalesByProduct($articleId);
              if ($topSale != null) {
                  $actualCount = $topSale->sales;
                  $actualCount += $count;
-                 $ok = self:: insertOrUpdate("UPDATE top_sales SET sales = ? WHERE product_id= ?", [$actualCount, $articleId]);
+                 $ok = $ok && self::insertOrUpdate("UPDATE top_sales SET sales = ? WHERE product_id= ?", [$actualCount, $articleId]);
              } else {
-                 $ok = self:: insertOrUpdate("INSERT INTO top_sales (product_id, sales) VALUES (?, ?)", [$articleId, $count]);
+                 $ok = $ok && self::insertOrUpdate("INSERT INTO top_sales (product_id, sales) VALUES (?, ?)", [$articleId, $count]);
              }
          }
          return $ok;
