@@ -24,8 +24,8 @@ $app->post('/checkout', function ($request, $response, $args) {
     $body = array(
         'intent' => 'sale',
         'redirect_urls' => array(
-            'return_url' => 'http://arthurius.local.dev/',
-            'cancel_url' => 'http://arthurius.local.dev/'
+            'return_url' => 'http://arthurius.local.test/',
+            'cancel_url' => 'http://arthurius.local.test/'
         ),
         'payer' => array(
             'payment_method' => 'paypal'

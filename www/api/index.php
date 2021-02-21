@@ -32,6 +32,7 @@ require __DIR__ . '/../../src/routes/user.route.php';
 require __DIR__ . '/../../src/routes/country.route.php';
 require __DIR__ . '/../../src/routes/phpmailer.route.php';
 require __DIR__ . '/../../src/routes/slider.route.php';
+require __DIR__ . '/../../src/routes/video.route.php';
 require __DIR__ . '/../../src/routes/brand.route.php';
 require __DIR__ . '/../../src/routes/slideproduct.route.php';
 require __DIR__ . '/../../src/routes/steel.route.php';

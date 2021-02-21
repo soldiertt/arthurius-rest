@@ -24,3 +24,7 @@ Run this command to run the test suite
 	php composer.phar test
 
 That's it! Now go build something cool.
+
+## Arthurius
+
+This project is served via docker in real-time, nothing to start from here, use d:\dev\docker\arthurius
