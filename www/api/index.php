@@ -25,6 +25,7 @@ require __DIR__ . '/../../src/middleware.php';
 
 // Register routes
 require __DIR__ . '/../../src/routes/product.route.php';
+require __DIR__ . '/../../src/routes/advancedproduct.route.php';
 require __DIR__ . '/../../src/routes/category.route.php';
 require __DIR__ . '/../../src/routes/paypal.route.php';
 require __DIR__ . '/../../src/routes/order.route.php';
