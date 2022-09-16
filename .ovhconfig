@@ -1,6 +1,6 @@
 app.engine=phpcgi
-app.engine.version=7.0
+app.engine.version=5.5
 http.firewall=none
 environment=production
-container.image=legacy
+container.image=stable
 

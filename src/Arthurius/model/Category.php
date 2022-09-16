@@ -22,7 +22,7 @@ EOD;
 EOD;
 
      public static function allRoots() {
-         return self::queryList("SELECT * FROM ".static::$table." WHERE parent = '' ORDER BY sortby");
+         return self::queryList("SELECT * FROM ".static::$table." WHERE parent is null ORDER BY sortby");
      }
 
      public static function subCategories($category) {

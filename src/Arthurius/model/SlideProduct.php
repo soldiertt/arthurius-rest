@@ -19,7 +19,7 @@ class SlideProduct extends Entity
 EOD;
 
     public static $SQL_SLIDER = <<<'EOD'
-        SELECT id, type, marque, name, description, picture, manche, acier, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product p, slider_product sp
         WHERE p.id = sp.product_id
 EOD;

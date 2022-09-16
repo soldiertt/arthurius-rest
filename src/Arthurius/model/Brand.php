@@ -12,7 +12,7 @@ namespace Arthurius\model;
      public static $table = "brands";
 
      public static function create($brand) {
-         return self::insertOrUpdate("INSERT INTO ".static::$table." (marque) VALUES (?)", [$brand['marque']], true);
+         return self::insertOrUpdate("INSERT INTO ".static::$table." (brand) VALUES (?)", [$brand['brand']], true);
      }
 
  }

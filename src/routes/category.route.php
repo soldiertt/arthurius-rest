@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: soldi
- * Date: 11-02-17
- * Time: 22:49
- */
-
 
 use Arthurius\model\Category;
 use Arthurius\model\Authorization;

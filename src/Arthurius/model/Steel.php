@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: soldi
- * Date: 09-10-16
- * Time: 21:40
- */
 namespace Arthurius\model;
 
  class Steel extends Entity {
 
      public static $SQL_ALL_STEELS = <<<'EOD'
-        SELECT distinct (acier)
-        FROM product WHERE acier is not null ORDER BY acier
+        SELECT distinct (steel)
+        FROM product WHERE steel is not null ORDER BY steel
 EOD;
 
      public static function all() {
@@ -21,8 +15,8 @@ EOD;
 
      public static function mapSteel($steel) {
          return array(
-             'id' => base64_encode($steel->acier),
-             'name' => $steel->acier
+             'id' => base64_encode($steel->steel),
+             'name' => $steel->steel
          );
      }
 

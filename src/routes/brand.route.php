@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: soldi
- * Date: 11-02-17
- * Time: 22:48
- */
 
 use Arthurius\model\Brand;
 use Arthurius\model\Authorization;
