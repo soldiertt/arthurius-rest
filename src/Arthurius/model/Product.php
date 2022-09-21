@@ -8,37 +8,37 @@ class Product extends Entity
     public static $table = "product";
 
     public static $SQL_FIND_BY_CATEGORY = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product WHERE type=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_FIND_BY_BRAND = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product WHERE brand=?
         ORDER BY name desc
 EOD;
 
     public static $SQL_SEARCH = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         WHERE brand like ? OR name like ? OR description like ? or handle like ?
 EOD;
 
     public static $SQL_PROMO = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         WHERE promo = true
 EOD;
 
     public static $SQL_CREATE = <<<'EOD'
-        INSERT INTO product (type, brand, name, description, picture, handle, steel, size, youtube_ref, 
+        INSERT INTO product (type, brand, name, description, pictures, handle, steel, size, youtube_ref, 
           price, comment, promo, old_price, instock)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 EOD;
 
     public static $SQL_UPDATE = <<<'EOD'
-        UPDATE product SET type= ?, brand = ?, name = ?, description = ?, picture = ?, handle = ?, 
+        UPDATE product SET type= ?, brand = ?, name = ?, description = ?, pictures = ?, handle = ?, 
           steel = ?, size = ?, youtube_ref = ?, price = ?, comment = ?, promo = ?, old_price = ?, instock = ? WHERE id = ?
 EOD;
 
@@ -48,7 +48,7 @@ EOD;
 EOD;
 
     public static $SQL_TOP_SALES_BY_CATEGORY = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product
         JOIN top_sales ON product.id = top_sales.product_id
         WHERE type = ? OR type IN (SELECT type FROM section WHERE parent=?)
@@ -121,7 +121,7 @@ EOD;
             array_push($params, self::toMysqlInt($instock));
         }
 
-        $SQL = "SELECT id, type, brand, name, picture, handle, steel, size, youtube_ref, "
+        $SQL = "SELECT id, type, brand, name, pictures, handle, steel, size, youtube_ref, "
             ."promo, price, old_price, instock, comment "
             ."FROM product $where ORDER BY brand, name";
 
@@ -133,7 +133,7 @@ EOD;
         return self::insertOrUpdate(self::$SQL_CREATE,
             [
                 $product['type'], $product['brand'], $product['name'],
-                $product['description'], $product['picture'], $product['handle'], $product['steel'], $product['size'],
+                $product['description'], join(",", $product['pictures']), $product['handle'], $product['steel'], $product['size'],
                 $product['youtube_ref'], $product['price'], $product['comment'], self::toMysqlInt($product['promo']),
                 $product['old_price'], self::toMysqlInt($product['instock'])
             ], true);
@@ -143,7 +143,7 @@ EOD;
         return self::insertOrUpdate(self::$SQL_UPDATE,
             [
                 $product['type'], $product['brand'], $product['name'],
-                $product['description'], $product['picture'], $product['handle'], $product['steel'], $product['size'],
+                $product['description'], join(",", $product['pictures']), $product['handle'], $product['steel'], $product['size'],
                 $product['youtube_ref'], $product['price'], $product['comment'], self::toMysqlInt($product['promo']),
                 $product['old_price'], self::toMysqlInt($product['instock']), $id
             ]);
@@ -160,6 +160,7 @@ EOD;
     public static function mapProduct($product) {
         $product->promo = (bool)$product->promo;
         $product->instock = (bool)$product->instock;
+        $product->pictures = array_map('trim', explode(',', $product->pictures));
         return $product;
     }
 

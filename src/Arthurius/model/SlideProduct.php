@@ -19,7 +19,7 @@ class SlideProduct extends Entity
 EOD;
 
     public static $SQL_SLIDER = <<<'EOD'
-        SELECT id, type, brand, name, description, picture, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
+        SELECT id, type, brand, name, description, pictures, handle, steel, size, youtube_ref, promo, price, old_price, instock, comment
         FROM product p, slider_product sp
         WHERE p.id = sp.product_id
 EOD;
@@ -41,6 +41,7 @@ EOD;
     public static function mapProduct($product) {
         $product->promo = (bool)$product->promo;
         $product->instock = (bool)$product->instock;
+        $product->pictures = array_map('trim', explode(',', $product->pictures));
         return $product;
     }
 
