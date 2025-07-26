@@ -28,3 +28,7 @@ That's it! Now go build something cool.
 ## Arthurius
 
 This project is served via docker in real-time, nothing to start from here, use d:\dev\docker\arthurius
+
+in hosts file, should have:
+
+127.0.0.1 arthurius.local.test
