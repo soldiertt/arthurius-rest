@@ -8,23 +8,14 @@ class EnvUtil {
 
     public static function getPaypalUrl($type) {
         $env = getenv('ENVIRONMENT') ?: 'development';
+        $base = ($env === 'production')
+            ? 'https://api-m.paypal.com'
+            : 'https://api-m.sandbox.paypal.com';
 
-        if ($type === 'payment') {
-            $paymentUrl = 'https://api.sandbox.paypal.com/v1/payments/payment';
-            if ($env === 'production') {
-                $paymentUrl = 'https://api.paypal.com/v1/payments/payment';
-            }
-
-            return $paymentUrl;
-        } else if ($type === 'oauth') {
-            $paymentUrl = 'https://api.sandbox.paypal.com/v1/oauth2/token';
-            if ($env === 'production') {
-                $paymentUrl = 'https://api.paypal.com/v1/oauth2/token';
-            }
-
-            return $paymentUrl;
+        switch ($type) {
+            case 'orders': return $base . '/v2/checkout/orders';
+            case 'oauth':  return $base . '/v1/oauth2/token';
         }
-
         return null;
     }
 

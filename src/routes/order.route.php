@@ -11,9 +11,14 @@ use Arthurius\model\Authorization;
 
 $app->get('/order', function ($request, $response, $args) {
     $userId = $request->getQueryParam('userId');
+    $headerUserId = $request->getHeader('X-Arth-UserId')[0];
     $this->logger->info("Slim-Skeleton 'get /order '");
 
     if ($userId != null) {
+        if ($headerUserId == null || ($headerUserId !== $userId && !Authorization::checkIsAdmin($request))) {
+            return Authorization::forbidden($response);
+        }
+
         $orders = Order::allOrdersByUser($userId);
     } else {
 
@@ -31,6 +36,11 @@ $app->get('/order', function ($request, $response, $args) {
 
 $app->post('/order', function ($request, $response, $args) {
     $order = $request->getParsedBody();
+    $userId = $request->getHeader('X-Arth-UserId')[0];
+    if ($userId == null) {
+        return Authorization::forbidden($response);
+    }
+    $order['userId'] = $userId;
     $this->logger->info("Slim-Skeleton 'post /order '".json_encode($order));
 
     $id = Order::createOrder($order);
